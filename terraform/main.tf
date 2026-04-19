@@ -25,13 +25,22 @@ resource "azurerm_storage_account" "storage" {
   resource_group_name      = var.resource_group_name
   location                 = var.location
   account_tier             = "Standard"
-  account_replication_type = "LRS"
+  account_replication_type = "GRS"
   min_tls_version          = "TLS1_2"
+
+  blob_properties {
+    delete_retention_policy {
+      days = 30
+    }
+    versioning_enabled = true
+  }
 
   tags = {
     environment = var.environment
   }
-}# Key Vault
+}
+
+# Key Vault
 resource "azurerm_key_vault" "kv" {
   name                = "kv-securefiles-001"
   location            = var.location
@@ -53,7 +62,9 @@ resource "azurerm_key_vault" "kv" {
 
   soft_delete_retention_days = 7
   purge_protection_enabled   = false
-}# Private Endpoint for Storage Account
+}
+
+# Private Endpoint for Storage Account
 resource "azurerm_private_endpoint" "storage_pe" {
   name                = "pe-stsecurefiles"
   location            = var.location
@@ -77,4 +88,71 @@ resource "azurerm_storage_account_network_rules" "storage_network_rules" {
   storage_account_id = azurerm_storage_account.storage.id
   default_action     = "Deny"
   bypass             = ["AzureServices"]
+}
+
+# Log Analytics Workspace
+resource "azurerm_log_analytics_workspace" "law" {
+  name                = "law-securefiles"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+
+  tags = {
+    environment = var.environment
+  }
+}
+
+# Monitor Action Group
+resource "azurerm_monitor_action_group" "alert_group" {
+  name                = "ag-securefiles"
+  resource_group_name = var.resource_group_name
+  short_name          = "securefiles"
+
+  email_receiver {
+    name          = "admin"
+    email_address = "Lefotlhem@yahoo.com"
+  }
+}
+
+# Recovery Services Vault (for backups)
+resource "azurerm_recovery_services_vault" "rsv" {
+  name                = "rsv-securefiles"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  sku                 = "Standard"
+  soft_delete_enabled = true
+
+  tags = {
+    environment = var.environment
+  }
+}# Cost Management Budget
+resource "azurerm_consumption_budget_subscription" "budget" {
+  name            = "budget-securefiles"
+  subscription_id = "/subscriptions/2e654a0b-bafe-43f6-bbc6-559d8a56e675"
+
+  amount     = 50
+  time_grain = "Monthly"
+
+  time_period {
+    start_date = "2026-05-01T00:00:00Z"
+  }
+
+  notification {
+    enabled        = true
+    threshold      = 80
+    operator       = "GreaterThan"
+    threshold_type = "Actual"
+
+    contact_emails = ["Lefotlhem@yahoo.com"]
+  }
+
+  notification {
+    enabled        = true
+    threshold      = 100
+    operator       = "GreaterThan"
+    threshold_type = "Actual"
+
+    contact_emails = ["Lefotlhem@yahoo.com"]
+  }
 }
