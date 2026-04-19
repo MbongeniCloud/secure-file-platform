@@ -1,23 +1,23 @@
-variable "resource_group_name" {
-  description = "Name of the resource group"
+variable "client_id" {
+  description = "Azure Client ID"
   type        = string
-  default     = "rg-securefiles"
+  default     = ""
 }
 
-variable "location" {
-  description = "Azure region"
+variable "client_secret" {
+  description = "Azure Client Secret"
   type        = string
-  default     = "southafricanorth"
+  default     = ""
 }
 
-variable "storage_account_name" {
-  description = "Name of the storage account"
+variable "tenant_id" {
+  description = "Azure Tenant ID"
   type        = string
-  default     = "stsecurefiles001"
+  default     = ""
 }
 
-variable "environment" {
-  description = "Environment name"
+variable "subscription_id" {
+  description = "Azure Subscription ID"
   type        = string
-  default     = "production"
+  default     = ""
 }
