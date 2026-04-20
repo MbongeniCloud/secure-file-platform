@@ -213,7 +213,122 @@ terraform apply
 - **Cost Awareness** — Budget alerts prevent surprise bills in cloud environments
 - **Disaster Recovery** — GRS replication and soft delete are essential for production data
 
+- ## Live Deployment Evidence
+
+All resources below are deployed live in Microsoft Azure — 
+South Africa North region. Screenshots taken directly 
+from the Azure Portal.
+
 ---
+
+### 1. Resource Group Overview
+
+> Complete resource group `rg-securefiles` showing all 
+> deployed infrastructure components including Virtual Network, 
+> Storage Account, Key Vault, Private Endpoint, Log Analytics 
+> Workspace, Recovery Services Vault, and Budget Alert — 
+> all provisioned via Terraform in a single automated deployment.
+> <img width="1366" height="731" alt="Resource Group Overview" src="https://github.com/user-attachments/assets/c0b8d406-23d4-4238-88a0-1bb0ae706570" />
+
+ ---
+
+### 2. Virtual Network & Subnets
+
+> Private Virtual Network `vnet-securefiles` configured with 
+> address space 10.0.0.0/16 and dedicated subnet 
+> `snet-privateendpoints` (10.0.1.0/24) for secure 
+> Private Endpoint connectivity. No public-facing 
+> network interfaces deployed.
+<img width="1366" height="731" alt="Virtual Network" src="https://github.com/user-attachments/assets/2bd10251-b653-4771-9a95-77626ae04dcc" />
+
+---
+
+### 3. Private Endpoint
+
+> Private Endpoint `pe-stsecurefiles` creates a private 
+> network interface inside the Virtual Network, routing all 
+> storage traffic through the internal network. Public internet 
+> access to the storage account is completely eliminated — 
+> a core Zero Trust security requirement.
+> <img width="1366" height="732" alt="Private Endpoint" src="https://github.com/user-attachments/assets/d89dcc09-f69b-476d-b42a-e0fec4876eb3" />
+
+
+---
+
+### 4. Storage Account — Network Security
+
+> Storage account `stsecurefiles001` with public network 
+> access disabled and firewall rules set to Deny by default. 
+> Only Azure Services are explicitly bypassed. Combined with 
+> the Private Endpoint, this eliminates the storage account 
+> from the public internet attack surface entirely.
+> <img width="1366" height="727" alt="Storage Account Network Settings" src="https://github.com/user-attachments/assets/1b6f4291-3acb-46b6-8c4d-b451394fcaa1" />
+
+
+---
+
+### 5. Azure Key Vault
+
+> Key Vault `kv-securefiles-001` deployed as the centralised 
+> secrets and encryption key store. Access policies restrict 
+> key and secret operations to authorised identities only. 
+> Soft delete protection enabled with 7-day retention — 
+> prevents accidental or malicious permanent deletion of 
+> cryptographic material.
+> <img width="1366" height="733" alt="Key Vault" src="https://github.com/user-attachments/assets/ef3c734d-e221-4fbd-b675-ab982adbc0f5" />
+
+
+---
+
+### 6. Recovery Services Vault
+
+> Recovery Services Vault `rsv-securefiles` provides the 
+> backup and disaster recovery foundation. Combined with 
+> Geo-Redundant Storage (GRS) replication on the storage 
+> account, data is automatically replicated to a secondary 
+> Azure region — ensuring business continuity in the event 
+> of a regional outage.
+> <img width="1366" height="725" alt="Recovery Services Vault" src="https://github.com/user-attachments/assets/d96d4d6f-45c9-400f-9b33-d9199ce06e95" />
+
+
+---
+
+### 7. Log Analytics Workspace
+
+> Centralised Log Analytics Workspace `law-securefiles` 
+> collects diagnostic logs and metrics from all deployed 
+> resources. 30-day log retention configured. Connected to 
+> Azure Monitor Action Group for automated email alerting — 
+> forming the observability layer of the platform.
+> <img width="1366" height="731" alt="Log Analytics Workspace" src="https://github.com/user-attachments/assets/eaac9ae0-94de-4442-bc2a-40c97d2ad4bc" />
+
+
+---
+
+### 8. Microsoft Defender for Cloud
+
+> Microsoft Defender for Cloud security posture assessment 
+> showing active recommendations and security score for the 
+> subscription. Defender provides continuous security 
+> monitoring, misconfiguration detection, and threat 
+> intelligence across all deployed Azure resources.
+> <img width="1366" height="729" alt="Microsoft Defender for Cloud" src="https://github.com/user-attachments/assets/0aac088d-655f-4a8c-b16a-3d9fd9f8a78f" />
+
+
+---
+
+### 9. Budget Alert — Cost Management
+
+> Azure Cost Management budget `budget-securefiles` configured 
+> at $50/month with automated email notifications triggered 
+> at 80% ($40) and 100% ($50) of monthly spend. Demonstrates 
+> FinOps awareness and cost governance — a requirement in 
+> every enterprise cloud environment.
+> <img width="1366" height="731" alt="Budget Alert" src="https://github.com/user-attachments/assets/629a4ba8-7139-4ff0-be31-8718382b3e6e" />
+
+
+---
+
 
 ## Author
 
