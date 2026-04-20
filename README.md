@@ -17,7 +17,7 @@
 
 ## Project Overview
 
-This project demonstrates the design and deployment of a **enterprise-grade secure file storage platform** on Microsoft Azure, implementing Zero Trust security principles from the ground up. Every resource is provisioned using Terraform, ensuring repeatable, version-controlled infrastructure.
+This project simulates a production-grade secure file storage platform for a regulated enterprise environment, implementing Zero Trust security principles and cloud governance best practices.
 
 The platform was built as a learning project to demonstrate real-world cloud engineering skills — from initial architecture design through to monitoring, backup, and cost management.
 
