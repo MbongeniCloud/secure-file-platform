@@ -17,13 +17,14 @@
 
 ## Project Overview
 
-This project demonstrates the design and implementation of a production-grade secure file storage platform on Microsoft Azure, built to align with Zero Trust security principles and enterprise cloud governance standards.
+This project demonstrates the design and implementation of a production-grade secure file storage platform on Microsoft Azure, aligned with Zero Trust principles and enterprise cloud governance standards.
 
-The solution simulates a real-world regulated environment where sensitive data must be protected against unauthorized access, misconfiguration, and exposure. A secure-by-design approach is applied throughout, ensuring that all resources are deployed with strict security controls, private network access, and identity-based authentication.
+The solution simulates a regulated environment where sensitive data must be protected from unauthorized access, misconfiguration, and exposure. All resources are deployed using a secure-by-design approach, enforcing private network access, strong identity controls, and strict security configurations.
 
-Infrastructure is provisioned entirely using Terraform, enabling consistent, repeatable, and version-controlled deployments. The platform incorporates centralized secrets management, continuous monitoring, backup and disaster recovery, and cost governance — reflecting the core requirements of modern cloud environments in financial services and other regulated industries.
+Infrastructure is provisioned entirely using Terraform, enabling consistent, repeatable, and version-controlled deployments. The platform includes centralized secrets management, monitoring, backup and disaster recovery, and cost governance.
 
-This implementation highlights a strong focus on risk reduction, operational visibility, and audit readiness, demonstrating how cloud platforms can be securely deployed and managed at an enterprise level.
+This implementation focuses on risk reduction, operational visibility, and audit readiness — key requirements for enterprise and financial services environments.
+
 
 
 ---
