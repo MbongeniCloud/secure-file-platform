@@ -1,11 +1,5 @@
 # Secure File Platform on Azure
 
-<div align="center">
-
-![Azure](https://img.shields.io/badge/Microsoft_Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white)
-![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
-![Security](https://img.shields.io/badge/Zero_Trust-Security-red?style=for-the-badge)
 
 **A production-grade, secure cloud file storage platform built entirely with Infrastructure as Code**
 
